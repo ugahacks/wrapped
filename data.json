@@ -1,0 +1,85 @@
+{
+  "year": 2025,
+  "event": "UGAHacks 11",
+  "stats": {
+    "totalHackers": 547,
+    "totalProjects": 89,
+    "linesOfCode": 1240000,
+    "totalHours": 36,
+    "topLanguage": "JavaScript",
+    "mostUsedFramework": "React",
+    "avgTeamSize": 3.2
+  },
+  "topProjects": [
+    {
+      "rank": 1,
+      "name": "AI Study Buddy",
+      "team": "Team Phoenix",
+      "description": "Machine learning app that adapts to your learning style",
+      "technologies": ["Python", "TensorFlow", "React"],
+      "votes": 4287
+    },
+    {
+      "rank": 2,
+      "name": "Local Connect",
+      "team": "Team Nexus",
+      "description": "Community platform for local event discovery",
+      "technologies": ["JavaScript", "Node.js", "MongoDB"],
+      "votes": 3956
+    },
+    {
+      "rank": 3,
+      "name": "EcoTrack",
+      "team": "Team Green",
+      "description": "Carbon footprint tracker for everyday items",
+      "technologies": ["React Native", "Firebase"],
+      "votes": 3821
+    }
+  ],
+  "topWorkshops": [
+    {
+      "name": "Web Dev Fundamentals",
+      "attendees": 234,
+      "instructor": "Sarah Chen"
+    },
+    {
+      "name": "AI/ML Basics",
+      "attendees": 198,
+      "instructor": "Dr. James Park"
+    },
+    {
+      "name": "UI/UX Design",
+      "attendees": 167,
+      "instructor": "Maya Patel"
+    }
+  ],
+  "highlights": [
+    {
+      "icon": "🔥",
+      "label": "Most Caffeinated Team",
+      "value": "Team Nocturnal"
+    },
+    {
+      "icon": "🚀",
+      "label": "Most Innovative Project",
+      "value": "AI Study Buddy"
+    },
+    {
+      "icon": "🎨",
+      "label": "Best Design",
+      "value": "Local Connect"
+    },
+    {
+      "icon": "⚡",
+      "label": "Speed Demon",
+      "value": "Team Lightning (finished in 18 hours)"
+    }
+  ],
+  "languages": [
+    { "name": "JavaScript", "percentage": 32, "color": "#f7df1e" },
+    { "name": "Python", "percentage": 22, "color": "#3776ab" },
+    { "name": "TypeScript", "percentage": 18, "color": "#3178c6" },
+    { "name": "Java", "percentage": 15, "color": "#007396" },
+    { "name": "Other", "percentage": 13, "color": "#9b59b6" }
+  ]
+}

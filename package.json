@@ -1,0 +1,25 @@
+{
+  "name": "wrapped",
+  "version": "1.0.0",
+  "description": "UGAHacks Wrapped 2025 - Magic Edition",
+  "main": "main.js",
+  "scripts": {
+    "dev": "npx http-server",
+    "start": "npx http-server -p 8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ugahacks/wrapped.git"
+  },
+  "keywords": ["ugahacks", "wrapped", "spotify-wrapped"],
+  "author": "UGAHacks",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ugahacks/wrapped/issues"
+  },
+  "homepage": "https://github.com/ugahacks/wrapped#readme",
+  "dependencies": {
+    "aos": "^2.3.4"
+  }
+}
