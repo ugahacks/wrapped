@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UGAHacks Wrapped 2025 - Magic Edition</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="scroll-container">
+        <!-- Page 1: Cover -->
+        <section class="page cover" data-aos="fade-in" data-aos-duration="1000">
+            <div class="magic-bg"></div>
+            <div class="content">
+                <h1 class="brand-title">UGAHacks Wrapped</h1>
+                <p class="year">2025</p>
+                <p class="subtitle">Your Magic Awaits</p>
+                <div class="cta-button" onclick="scrollToNext()">Begin Your Journey</div>
+            </div>
+        </section>
+
+        <!-- Page 2: Stats -->
+        <section class="page stats-page" data-aos="fade-in">
+            <div class="magic-bg"></div>
+            <div class="content">
+                <h2 data-aos="slide-up" data-aos-delay="100">2025 By The Numbers</h2>
+                <div class="stats-grid">
+                    <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="stat-number" id="stat-hackers">547</div>
+                        <div class="stat-label">Hackers</div>
+                    </div>
+                    <div class="stat-card" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="stat-number" id="stat-projects">89</div>
+                        <div class="stat-label">Projects Created</div>
+                    </div>
+                    <div class="stat-card" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="stat-number" id="stat-code">1.2M</div>
+                        <div class="stat-label">Lines of Code</div>
+                    </div>
+                    <div class="stat-card" data-aos="zoom-in" data-aos-delay="500">
+                        <div class="stat-number" id="stat-hours">36</div>
+                        <div class="stat-label">Hours of Hacking</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 3: Top Projects -->
+        <section class="page projects-page" data-aos="fade-in">
+            <div class="magic-bg"></div>
+            <div class="content">
+                <h2 data-aos="slide-up">🏆 Top Projects</h2>
+                <div class="projects-list">
+                    <div class="project-card" data-aos="slide-up" data-aos-delay="200">
+                        <div class="rank">1st</div>
+                        <h3 id="project-1-name">Project Name</h3>
+                        <p id="project-1-desc" class="project-desc"></p>
+                        <div class="project-tech">
+                            <span id="project-1-tech"></span>
+                        </div>
+                        <div class="project-votes" id="project-1-votes"></div>
+                    </div>
+                    <div class="project-card" data-aos="slide-up" data-aos-delay="300">
+                        <div class="rank">2nd</div>
+                        <h3 id="project-2-name">Project Name</h3>
+                        <p id="project-2-desc" class="project-desc"></p>
+                        <div class="project-tech">
+                            <span id="project-2-tech"></span>
+                        </div>
+                        <div class="project-votes" id="project-2-votes"></div>
+                    </div>
+                    <div class="project-card" data-aos="slide-up" data-aos-delay="400">
+                        <div class="rank">3rd</div>
+                        <h3 id="project-3-name">Project Name</h3>
+                        <p id="project-3-desc" class="project-desc"></p>
+                        <div class="project-tech">
+                            <span id="project-3-tech"></span>
+                        </div>
+                        <div class="project-votes" id="project-3-votes"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 4: Languages -->
+        <section class="page languages-page" data-aos="fade-in">
+            <div class="magic-bg"></div>
+            <div class="content">
+                <h2 data-aos="slide-up">Most Used Languages</h2>
+                <div class="languages-container">
+                    <div id="languages-list"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 5: Workshops -->
+        <section class="page workshops-page" data-aos="fade-in">
+            <div class="magic-bg"></div>
+            <div class="content">
+                <h2 data-aos="slide-up">📚 Top Workshops</h2>
+                <div class="workshops-grid">
+                    <div class="workshop-card" data-aos="flip-left" data-aos-delay="200">
+                        <h3 id="workshop-1-name">Workshop</h3>
+                        <p class="workshop-stat" id="workshop-1-attendees"></p>
+                        <p class="workshop-instructor" id="workshop-1-instructor"></p>
+                    </div>
+                    <div class="workshop-card" data-aos="flip-left" data-aos-delay="300">
+                        <h3 id="workshop-2-name">Workshop</h3>
+                        <p class="workshop-stat" id="workshop-2-attendees"></p>
+                        <p class="workshop-instructor" id="workshop-2-instructor"></p>
+                    </div>
+                    <div class="workshop-card" data-aos="flip-left" data-aos-delay="400">
+                        <h3 id="workshop-3-name">Workshop</h3>
+                        <p class="workshop-stat" id="workshop-3-attendees"></p>
+                        <p class="workshop-instructor" id="workshop-3-instructor"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 6: Highlights -->
+        <section class="page highlights-page" data-aos="fade-in">
+            <div class="magic-bg"></div>
+            <div class="content">
+                <h2 data-aos="slide-up">✨ Special Awards</h2>
+                <div class="highlights-grid">
+                    <div class="highlight-card" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="highlight-icon">🔥</div>
+                        <p class="highlight-label">Most Caffeinated Team</p>
+                        <p class="highlight-value">Team Nocturnal</p>
+                    </div>
+                    <div class="highlight-card" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="highlight-icon">🚀</div>
+                        <p class="highlight-label">Most Innovative</p>
+                        <p class="highlight-value">AI Study Buddy</p>
+                    </div>
+                    <div class="highlight-card" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="highlight-icon">🎨</div>
+                        <p class="highlight-label">Best Design</p>
+                        <p class="highlight-value">Local Connect</p>
+                    </div>
+                    <div class="highlight-card" data-aos="zoom-in" data-aos-delay="500">
+                        <div class="highlight-icon">⚡</div>
+                        <p class="highlight-label">Speed Demon</p>
+                        <p class="highlight-value">Team Lightning</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 7: Closing -->
+        <section class="page closing" data-aos="fade-in">
+            <div class="magic-bg"></div>
+            <div class="content">
+                <h2 data-aos="slide-up" data-aos-delay="100">Until Next Year...</h2>
+                <p class="closing-text" data-aos="fade-in" data-aos-delay="300">Thank you for making UGAHacks 11 magical!</p>
+                <div class="final-logo" data-aos="zoom-in" data-aos-delay="500">UGAHacks</div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
