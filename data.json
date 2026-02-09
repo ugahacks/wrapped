@@ -1,85 +1,128 @@
 {
-  "year": 2025,
-  "event": "UGAHacks 11",
-  "stats": {
-    "totalHackers": 547,
-    "totalProjects": 89,
-    "linesOfCode": 1240000,
-    "totalHours": 36,
-    "topLanguage": "JavaScript",
-    "mostUsedFramework": "React",
-    "avgTeamSize": 3.2
+  "meta": {
+    "eventName": "UGAHacks 11",
+    "title": "UGAHacks 11 Wrapped",
+    "dates": "February 6-8, 2026",
+    "location": "Miller Learning Center",
+    "tagline": "One weekend. Hundreds of builders. Thousands of memories.",
+    "ctaLabel": "Scroll to start"
   },
-  "topProjects": [
+  "hero": {
+    "hint": "Swipe down",
+    "thankYouLines": [
+      "Thank you for building with us at UGAHacks 11.",
+      "You brought the magic.",
+      "You made this weekend unforgettable.",
+      "See you next time. Go Dawgs."
+    ],
+    "statsSubtitle": "The finale",
+    "statsTitle": "By the numbers",
+    "statsSignoff": "See you next year"
+  },
+  "particle": {
+    "title": "Language Share",
+    "count": 560,
+    "gMorphColor": "#BA0C2F",
+    "gMorphStart": 0.8,
+    "languages": [
+      { "name": "JavaScript", "percentage": 32, "color": "#FFCF59" },
+      { "name": "Python", "percentage": 22, "color": "#A7B7D9" },
+      { "name": "TypeScript", "percentage": 18, "color": "#7B9A7B" },
+      { "name": "Java", "percentage": 15, "color": "#FAF3E0" },
+      { "name": "Other", "percentage": 13, "color": "#A16C2A" }
+    ]
+  },
+  "statsSections": [
     {
-      "rank": 1,
-      "name": "AI Study Buddy",
-      "team": "Team Phoenix",
-      "description": "Machine learning app that adapts to your learning style",
-      "technologies": ["Python", "TensorFlow", "React"],
-      "votes": 4287
+      "title": "Attendance",
+      "stats": [
+        { "number": 538, "label": "hackers attended", "color": "#FFCF59" },
+        { "number": 336, "label": "UGA students", "color": "#BA0C2F" },
+        {
+          "number": 40,
+          "label": "mentors, volunteers, and judges",
+          "color": "#7B9A7B"
+        },
+        { "number": 16, "label": "schools represented", "color": "#FAF3E0" }
+      ]
     },
     {
-      "rank": 2,
-      "name": "Local Connect",
-      "team": "Team Nexus",
-      "description": "Community platform for local event discovery",
-      "technologies": ["JavaScript", "Node.js", "MongoDB"],
-      "votes": 3956
+      "title": "Projects and Code",
+      "stats": [
+        { "number": 151, "label": "projects submitted", "color": "#FFCF59" },
+        {
+          "number": "null",
+          "label": "thousand lines of code written",
+          "color": "#A7B7D9"
+        },
+        { "label": "Most used language: JavaScript", "color": "#7B9A7B" },
+        {
+          "number": 3,
+          "label": "projects who pushed node_modules",
+          "color": "#A16C2A"
+        }
+      ]
     },
     {
-      "rank": 3,
-      "name": "EcoTrack",
-      "team": "Team Green",
-      "description": "Carbon footprint tracker for everyday items",
-      "technologies": ["React Native", "Firebase"],
-      "votes": 3821
+      "title": "Around the World",
+      "stats": [
+        { "number": 9, "label": "countries of origin", "color": "#FFCF59" },
+        { "number": 4, "label": "continents represented", "color": "#A7B7D9" },
+        { "label": "Furthest hack: Sydney, Australia", "color": "#7B9A7B" },
+        {
+          "number": 1,
+          "label": "University of Waterloo hoodie spotted",
+          "color": "#FAF3E0"
+        }
+      ]
     }
   ],
-  "topWorkshops": [
-    {
-      "name": "Web Dev Fundamentals",
-      "attendees": 234,
-      "instructor": "Sarah Chen"
-    },
-    {
-      "name": "AI/ML Basics",
-      "attendees": 198,
-      "instructor": "Dr. James Park"
-    },
-    {
-      "name": "UI/UX Design",
-      "attendees": 167,
-      "instructor": "Maya Patel"
-    }
-  ],
-  "highlights": [
-    {
-      "icon": "🔥",
-      "label": "Most Caffeinated Team",
-      "value": "Team Nocturnal"
-    },
-    {
-      "icon": "🚀",
-      "label": "Most Innovative Project",
-      "value": "AI Study Buddy"
-    },
-    {
-      "icon": "🎨",
-      "label": "Best Design",
-      "value": "Local Connect"
-    },
-    {
-      "icon": "⚡",
-      "label": "Speed Demon",
-      "value": "Team Lightning (finished in 18 hours)"
-    }
-  ],
-  "languages": [
-    { "name": "JavaScript", "percentage": 32, "color": "#f7df1e" },
-    { "name": "Python", "percentage": 22, "color": "#3776ab" },
-    { "name": "TypeScript", "percentage": 18, "color": "#3178c6" },
-    { "name": "Java", "percentage": 15, "color": "#007396" },
-    { "name": "Other", "percentage": 13, "color": "#9b59b6" }
-  ]
+  "overview": {
+    "title": "Weekend Snapshot",
+    "cards": [
+      { "label": "Registered", "value": "955" },
+      { "label": "Median Check-In Time", "value": "Friday, 6:05 PM" }
+    ]
+  },
+  "projects": {
+    "title": "Top Project Moments",
+    "items": [
+      {
+        "name": "Name",
+        "team": "Team",
+        "description": "description",
+        "tags": ["Next.js", "4 Teammates", "StateFarm"],
+        "highlight": "Best Game Hack"
+      }
+    ]
+  },
+  "workshops": {
+    "title": "Most Attended Workshops",
+    "items": [
+      {
+        "name": "AWS Workshop",
+        "attendees": 65,
+        "host": "MLC 250 | AWS Solutions Architects"
+      },
+      {
+        "name": "Cox Workshop",
+        "attendees": 55,
+        "host": "MLC 213 | Hands on with Cox Automotive Engineers"
+      },
+      {
+        "name": "NCR Voyix Workshop",
+        "attendees": 57,
+        "host": "MLC 214 | Q&A with NCR Voyix Engineers"
+      }
+    ]
+  },
+  "highlights": {
+    "title": "Memorable Bits",
+    "items": [
+      { "label": "Pizza Slices Ordered", "value": "960" },
+      { "label": "Fastest First Commit", "value": "? minutes" },
+      { "label": "Most asked Question", "value": "Is there any redbull left?" },
+      { "label": "Sticker Count", "value": "1000+" }
+    ]
+  }
 }

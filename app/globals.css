@@ -1,0 +1,85 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme inline {
+  --color-mystic: #9b6798;
+  --color-indigo: #3e4c8a;
+  --color-periwinkle: #a7b7d9;
+  --color-sage: #7b9a7b;
+  --color-brown: #a16c2a;
+  --color-gold: #ffcf59;
+  --color-cream: #faf3e0;
+  --font-display: var(--font-display);
+  --font-sans: var(--font-body);
+}
+
+:root {
+  --mystic: #9b6798;
+  --indigo: #3e4c8a;
+  --periwinkle: #a7b7d9;
+  --sage: #7b9a7b;
+  --brown: #a16c2a;
+  --gold: #ffcf59;
+  --cream: #faf3e0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body), sans-serif;
+  color: var(--cream);
+  background:
+    radial-gradient(circle at 22% -8%, rgba(255, 207, 89, 0.18), transparent 38%),
+    radial-gradient(circle at 78% 14%, rgba(167, 183, 217, 0.15), transparent 34%),
+    linear-gradient(180deg, var(--mystic) 0%, var(--indigo) 100%);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display), serif;
+  letter-spacing: 0.01em;
+}
+
+.bg-magic {
+  background:
+    radial-gradient(circle at 20% -10%, rgba(255, 207, 89, 0.14), transparent 33%),
+    radial-gradient(circle at 75% 18%, rgba(167, 183, 217, 0.14), transparent 35%),
+    linear-gradient(180deg, rgba(155, 103, 152, 0.95) 0%, rgba(62, 76, 138, 0.98) 68%, rgba(46, 58, 108, 1) 100%);
+}
+
+.bg-vignette {
+  background: radial-gradient(circle at center, transparent 44%, rgba(10, 12, 34, 0.3) 72%, rgba(10, 12, 34, 0.58) 100%);
+}
+
+.bg-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23noise)' opacity='.6'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
