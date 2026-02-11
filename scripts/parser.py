@@ -21,7 +21,7 @@ def parseGithubs(filename: str) -> list:
     Returns:
         list[tuple[str, str]]: A list of GitHub links
     """
-    GITHUB_REGEX = r"(?:https?:\/\/)?(?:www\.)?github\.com\/([^,\s]+)\/([^,\s.]+)"
+    GITHUB_REGEX = r"(?:https?:\/\/)?(?:www\.)?github\.com\/([^\/,\s]+)\/([^\/,\s?#]+)"
 
     tryItLinks = []
 
@@ -35,14 +35,18 @@ def parseGithubs(filename: str) -> list:
                         tryIt_idx = j
                         break
                 continue
-            tryItLinks.append(row[tryIt_idx])
+
+            if tryIt_idx != -1 and tryIt_idx < len(row):
+                tryItLinks.append(row[tryIt_idx])
 
     filteredLinks = []
 
     for link in tryItLinks:
         match = re.search(GITHUB_REGEX, link)
         if match:
-            filteredLinks.append((match.group(1), match.group(2)))
+            username = match.group(1)
+            repo = re.sub(r"\.git$", "", match.group(2).rstrip("."))
+            filteredLinks.append((username, repo))
 
     return filteredLinks
 
@@ -59,10 +63,21 @@ class Pipeline:
         languages = {}
         for repo in self.repos:
             languageData = repo.languages()
-            for language in languageData:
-                languages[language] = (
-                    languages.get(language, 0) + languageData[language]
-                )
+            if not isinstance(languageData, dict):
+                continue
+            if "message" in languageData and "documentation_url" in languageData:
+                continue
+
+            for language, bytes_used in languageData.items():
+                if isinstance(bytes_used, str):
+                    if bytes_used.isdigit():
+                        bytes_used = int(bytes_used)
+                    else:
+                        continue
+                elif not isinstance(bytes_used, (int, float)):
+                    continue
+
+                languages[language] = languages.get(language, 0) + bytes_used
 
         for k, v in languages.items():
             languages[k] = v / 1e3
@@ -74,7 +89,7 @@ class Pipeline:
         results = {key: 0 for key in query}
         repos = {key: [] for key in query}
         for repo in self.repos:
-            data = repo.searchFiles(query)
+            data = repo.searchFiles(query.copy())
             for key in data:
                 if data[key]:
                     results[key] += 1
