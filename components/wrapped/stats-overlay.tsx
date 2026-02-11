@@ -24,6 +24,20 @@ function easeInOutCubic(t: number) {
   return 1 - Math.pow(-2 * t + 2, 3) / 2;
 }
 
+function renderLabelWithBold(label: string) {
+  const parts = label.split(/(\*\*.*?\*\*)/g);
+  return parts.map((part, index) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return (
+        <strong key={`${part}-${index}`} className="font-semibold text-cream">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    return <span key={`${part}-${index}`}>{part}</span>;
+  });
+}
+
 export function StatsOverlay({
   subtitle,
   title,
@@ -67,7 +81,14 @@ export function StatsOverlay({
                     const reveal = easeInOutCubic(
                       clamp((revealProgress - index * 0.025) / 0.55, 0, 1)
                     );
-                    const numberValue = stat.number ? Math.round(reveal * stat.number) : null;
+                    const animatedNumber =
+                      typeof stat.number === "number" ? Math.round(reveal * stat.number) : null;
+                    const displayNumber =
+                      typeof stat.number === "number"
+                        ? animatedNumber?.toLocaleString()
+                        : typeof stat.number === "string"
+                          ? stat.number
+                          : null;
 
                     return (
                       <Card
@@ -81,15 +102,15 @@ export function StatsOverlay({
                           transform: `translateY(${14 - 14 * reveal}px)`
                         }}
                       >
-                        {numberValue !== null ? (
+                        {displayNumber !== null ? (
                           <p className="text-sm text-cream/90">
                             <span className="text-lg font-bold" style={{ color: stat.color }}>
-                              {numberValue.toLocaleString()}
+                              {displayNumber}
                             </span>{" "}
-                            {stat.label}
+                            {renderLabelWithBold(stat.label)}
                           </p>
                         ) : (
-                          <p className="text-sm text-cream/90">{stat.label}</p>
+                          <p className="text-sm text-cream/90">{renderLabelWithBold(stat.label)}</p>
                         )}
                       </Card>
                     );

@@ -17,19 +17,19 @@
     ],
     "statsSubtitle": "The finale",
     "statsTitle": "By the numbers",
-    "statsSignoff": "See you next year"
+    "statsSignoff": "Keep scrolling, friend!"
   },
   "particle": {
-    "title": "Language Share",
+    "title": "Language Share (GitHub Repos)",
     "count": 560,
     "gMorphColor": "#BA0C2F",
     "gMorphStart": 0.8,
     "languages": [
-      { "name": "JavaScript", "percentage": 32, "color": "#FFCF59" },
-      { "name": "Python", "percentage": 22, "color": "#A7B7D9" },
-      { "name": "TypeScript", "percentage": 18, "color": "#7B9A7B" },
-      { "name": "Java", "percentage": 15, "color": "#FAF3E0" },
-      { "name": "Other", "percentage": 13, "color": "#A16C2A" }
+      { "name": "Python", "percentage": 81.49, "color": "#4B8BBE" },
+      { "name": "TypeScript", "percentage": 6.53, "color": "#2067B5" },
+      { "name": "C++", "percentage": 3.18, "color": "#00599C" },
+      { "name": "Cython", "percentage": 2.8, "color": "#366A96" },
+      { "name": "JavaScript", "percentage": 1.66, "color": "#F7DF1E" }
     ]
   },
   "statsSections": [
@@ -51,15 +51,29 @@
       "stats": [
         { "number": 151, "label": "projects submitted", "color": "#FFCF59" },
         {
-          "number": "null",
-          "label": "thousand lines of code written",
+          "number": 177.74,
+          "label": "MB of code analyzed from GitHub",
           "color": "#A7B7D9"
         },
-        { "label": "Most used language: JavaScript", "color": "#7B9A7B" },
         {
-          "number": 3,
-          "label": "projects who pushed node_modules",
-          "color": "#A16C2A"
+          "number": "81.49%",
+          "label": "of hackers used Python",
+          "color": "#7B9A7B"
+        },
+        {
+          "number": 11,
+          "label": "projects who pushed **node_modules**",
+          "color": "#cb3837"
+        },
+        {
+          "number": 18,
+          "label": "projects exposing **.env**",
+          "color": "#ECD540"
+        },
+        {
+          "number": 1,
+          "label": "project who pushed **venv**",
+          "color": "#F8B822"
         }
       ]
     },
@@ -85,16 +99,10 @@
     ]
   },
   "projects": {
-    "title": "Top Project Moments",
-    "items": [
-      {
-        "name": "Name",
-        "team": "Team",
-        "description": "description",
-        "tags": ["Next.js", "4 Teammates", "StateFarm"],
-        "highlight": "Best Game Hack"
-      }
-    ]
+    "title": "Top Picture",
+    "imageSrc": "/image.jpeg",
+    "imageAlt": "Top project moment photo",
+    "caption": "Gunner Stockton stopped by at UGAHacks!"
   },
   "workshops": {
     "title": "Most Attended Workshops",
@@ -120,9 +128,30 @@
     "title": "Memorable Bits",
     "items": [
       { "label": "Pizza Slices Ordered", "value": "960" },
-      { "label": "Fastest First Commit", "value": "? minutes" },
+      { "label": "Devpost Check-Ins", "value": "417" },
       { "label": "Most asked Question", "value": "Is there any redbull left?" },
       { "label": "Sticker Count", "value": "1000+" }
+    ]
+  },
+  "repoHygiene": {
+    "title": "Commit Oopsies",
+    "subtitle": "MMMMmm yummy api keys",
+    "items": [
+      {
+        "fileType": ".env",
+        "count": 18,
+        "description": "Secrets risk: environment files should not be in source control."
+      },
+      {
+        "fileType": "node_modules",
+        "count": 11,
+        "description": "Dependency folders are bulky and usually belong in .gitignore."
+      },
+      {
+        "fileType": "venv",
+        "count": 1,
+        "description": "Python virtual environments should be local, not versioned."
+      }
     ]
   }
 }

@@ -5,7 +5,7 @@ export type LanguageEntry = {
 };
 
 export type StatEntry = {
-  number?: number;
+  number?: number | string;
   label: string;
   color: string;
 };
@@ -45,13 +45,9 @@ export type WrappedData = {
   };
   projects: {
     title: string;
-    items: {
-      name: string;
-      team: string;
-      description: string;
-      tags: string[];
-      highlight: string;
-    }[];
+    imageSrc: string;
+    imageAlt: string;
+    caption?: string;
   };
   workshops: {
     title: string;
@@ -66,6 +62,15 @@ export type WrappedData = {
     items: {
       label: string;
       value: string;
+    }[];
+  };
+  repoHygiene: {
+    title: string;
+    subtitle: string;
+    items: {
+      fileType: string;
+      count: number;
+      description: string;
     }[];
   };
 };

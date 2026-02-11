@@ -1,44 +1,28 @@
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import Image from "next/image";
+
+import { Card, CardContent } from "@/components/ui/card";
 import { SectionShell } from "@/components/wrapped/section-shell";
 
 type ProjectsSectionProps = {
   title: string;
-  items: {
-    name: string;
-    team: string;
-    description: string;
-    tags: string[];
-    highlight: string;
-  }[];
+  imageSrc: string;
+  imageAlt: string;
+  caption?: string;
 };
 
-export function ProjectsSection({ title, items }: ProjectsSectionProps) {
+export function ProjectsSection({ title, imageSrc, imageAlt, caption }: ProjectsSectionProps) {
   return (
     <SectionShell title={title}>
-      <div className="space-y-3">
-        {items.map((project) => (
-          <Card key={project.name}>
-            <CardHeader>
-              <div className="flex items-center justify-between gap-2">
-                <CardTitle>{project.name}</CardTitle>
-                <Badge>{project.highlight}</Badge>
-              </div>
-              <CardDescription>{project.team}</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <p className="text-sm text-cream/85">{project.description}</p>
-              <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <Badge key={tag} variant="muted">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      <Card className="overflow-hidden border-periwinkle/25 bg-indigo/25">
+        <CardContent className="p-0">
+          <div className="relative aspect-[16/9] w-full">
+            <Image unoptimized src={imageSrc} alt={imageAlt} fill className="object-cover" priority={false} />
+          </div>
+          {caption ? (
+            <p className="px-4 py-3 text-sm text-cream/85 md:px-5">{caption}</p>
+          ) : null}
+        </CardContent>
+      </Card>
     </SectionShell>
   );
 }

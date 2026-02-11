@@ -8,6 +8,7 @@ import { LanguagesSection } from "@/components/wrapped/languages-section";
 import { OverviewSection } from "@/components/wrapped/overview-section";
 import { ProgressBar } from "@/components/wrapped/progress-bar";
 import { ProjectsSection } from "@/components/wrapped/projects-section";
+import { RepoHygieneSection } from "@/components/wrapped/repo-hygiene-section";
 import { StatsOverlay } from "@/components/wrapped/stats-overlay";
 import { ThankYouOverlay } from "@/components/wrapped/thank-you-overlay";
 import { WorkshopsSection } from "@/components/wrapped/workshops-section";
@@ -156,8 +157,18 @@ export function WrappedApp({ data }: WrappedAppProps) {
       <div className="relative z-[45] mx-auto max-w-4xl space-y-5 px-4 pb-16 pt-[300vh] md:space-y-6 md:px-6">
         <OverviewSection title={data.overview.title} cards={data.overview.cards} />
         <LanguagesSection title={data.particle.title} items={data.particle.languages} />
-        <ProjectsSection title={data.projects.title} items={data.projects.items} />
+        <ProjectsSection
+          title={data.projects.title}
+          imageSrc={data.projects.imageSrc}
+          imageAlt={data.projects.imageAlt}
+          caption={data.projects.caption}
+        />
         <WorkshopsSection title={data.workshops.title} items={data.workshops.items} />
+        <RepoHygieneSection
+          title={data.repoHygiene.title}
+          subtitle={data.repoHygiene.subtitle}
+          items={data.repoHygiene.items}
+        />
         <HighlightsSection title={data.highlights.title} items={data.highlights.items} />
       </div>
     </main>
