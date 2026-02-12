@@ -18,9 +18,11 @@ function easeInOutCubic(t: number) {
 }
 
 function lineState(index: number, total: number, progress: number) {
-  const gap = 1 / (total + 2);
+  const gap = 1 / (total + 1.2);
   const start = gap * index;
-  const end = start + gap * 1.3;
+
+  const stretch = index === 2 ? 1.1 : 1.0;
+  const end = start + gap * stretch;
   const local = clamp((progress - start) / (end - start), 0, 1);
   const eased = easeInOutCubic(local);
 

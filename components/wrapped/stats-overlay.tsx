@@ -55,15 +55,13 @@ export function StatsOverlay({
 
   return (
     <section
-      className="fixed inset-0 z-40 overflow-y-auto overflow-x-hidden px-4 pb-12 pt-20 md:px-8"
+      className="relative z-10 px-4 pb-12 pt-20 md:px-8 transition-opacity duration-150 ease-out"
       style={{
         opacity: visibility,
-        transform: `translateY(${-20 * liftProgress}vh)`,
-        pointerEvents: visibility > 0.1 ? "auto" : "none",
-        background:
-          "radial-gradient(circle at top, rgba(155,103,152,0.35) 0%, rgba(62,76,138,0.82) 48%, rgba(36,44,84,0.92) 100%)"
+        transform: `translateY(${12 - 12 * visibility}px)`,
+        pointerEvents: visibility > 0.1 ? "auto" : "none"
       }}
-      aria-hidden={visibility < 0.1}
+      aria-hidden={visibility < 0.05}
     >
       <div className="mx-auto max-w-4xl">
         <p className="text-center text-xs uppercase tracking-[0.22em] text-periwinkle">{subtitle}</p>

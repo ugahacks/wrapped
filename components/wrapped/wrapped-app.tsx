@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { HighlightsSection } from "@/components/wrapped/highlights-section";
+import { Footer } from "@/components/wrapped/footer";
 import { HeroOverlay } from "@/components/wrapped/hero-overlay";
 import { LanguagesSection } from "@/components/wrapped/languages-section";
 import { OverviewSection } from "@/components/wrapped/overview-section";
@@ -44,12 +45,19 @@ function computeScrollState(): ScrollState {
   const viewport = window.innerHeight;
   const max = Math.max(1, document.documentElement.scrollHeight - viewport);
 
+  const THANK_YOU_OFFSET = viewport * 0.4;
+  const THANK_YOU_SPAN = viewport * 1.2;
+  const STATS_START = viewport * 1.3; 
+  const STATS_WINDOW = viewport * 0.8;
+  const STATS_EXIT_START = STATS_START + viewport * 1.1; 
+  const STATS_EXIT_WINDOW = viewport * 0.6;
+
   return {
     overall: clamp(scrollY / max, 0, 1),
     morph: clamp(scrollY / viewport, 0, 1),
-    thankYou: clamp((scrollY - viewport) / viewport, 0, 1),
-    stats: clamp((scrollY - viewport * 1.5) / (viewport * 0.6), 0, 1),
-    statsExit: clamp((scrollY - viewport * 2.7) / (viewport * 0.5), 0, 1)
+    thankYou: clamp((scrollY - THANK_YOU_OFFSET) / THANK_YOU_SPAN, 0, 1),
+    stats: clamp((scrollY - STATS_START) / STATS_WINDOW, 0, 1),
+    statsExit: clamp((scrollY - STATS_EXIT_START) / STATS_EXIT_WINDOW, 0, 1)
   };
 }
 
@@ -101,7 +109,7 @@ export function WrappedApp({ data }: WrappedAppProps) {
     return 1 - (scroll.morph - 0.15) / 0.3;
   }, [scroll.morph]);
 
-  const thankYouFadeOut = easeInOutCubic(Math.min(1, scroll.stats / 0.22));
+  const thankYouFadeOut = easeInOutCubic(clamp((scroll.thankYou - 0.65) / 0.25, 0, 1));
   const statsRevealProgress = easeInOutCubic(Math.max(0, (scroll.stats - 0.2) / 0.8));
   const statsLiftProgress = easeInOutCubic(scroll.statsExit);
   const statsVisibility = statsRevealProgress * (1 - statsLiftProgress);
@@ -144,17 +152,16 @@ export function WrappedApp({ data }: WrappedAppProps) {
         lineProgress={scroll.thankYou}
       />
 
-      <StatsOverlay
-        subtitle={data.hero.statsSubtitle}
-        title={data.hero.statsTitle}
-        signoff={data.hero.statsSignoff}
-        sections={data.statsSections}
-        revealProgress={statsRevealProgress}
-        visibility={statsVisibility}
-        liftProgress={statsLiftProgress}
-      />
-
-      <div className="relative z-[45] mx-auto max-w-4xl space-y-5 px-4 pb-16 pt-[300vh] md:space-y-6 md:px-6">
+      <div className="relative z-[45] mx-auto max-w-4xl space-y-5 px-4 pb-8 pt-[210vh] md:space-y-6 md:px-6">
+        <StatsOverlay
+          subtitle={data.hero.statsSubtitle}
+          title={data.hero.statsTitle}
+          signoff={data.hero.statsSignoff}
+          sections={data.statsSections}
+          revealProgress={statsRevealProgress}
+          visibility={statsVisibility}
+          liftProgress={statsLiftProgress}
+        />
         <OverviewSection title={data.overview.title} cards={data.overview.cards} />
         <LanguagesSection title={data.particle.title} items={data.particle.languages} />
         <ProjectsSection
@@ -170,6 +177,7 @@ export function WrappedApp({ data }: WrappedAppProps) {
           items={data.repoHygiene.items}
         />
         <HighlightsSection title={data.highlights.title} items={data.highlights.items} />
+        <Footer />
       </div>
     </main>
   );
