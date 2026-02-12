@@ -25,6 +25,7 @@ type ScrollState = {
   morph: number;
   thankYou: number;
   stats: number;
+  statsScroll: number;
   statsExit: number;
 };
 
@@ -49,7 +50,10 @@ function computeScrollState(): ScrollState {
     morph: clamp(scrollY / viewport, 0, 1),
     thankYou: clamp((scrollY - viewport) / viewport, 0, 1),
     stats: clamp((scrollY - viewport * 1.5) / (viewport * 0.6), 0, 1),
-    statsExit: clamp((scrollY - viewport * 2.7) / (viewport * 0.5), 0, 1)
+    // Scroll through stats content: starts after reveal (2.1vh), ends before exit (3.5vh)
+    statsScroll: clamp((scrollY - viewport * 2.1) / (viewport * 1.4), 0, 1),
+    // Stats exit animation
+    statsExit: clamp((scrollY - viewport * 3.5) / (viewport * 0.5), 0, 1)
   };
 }
 
@@ -59,6 +63,7 @@ export function WrappedApp({ data }: WrappedAppProps) {
     morph: 0,
     thankYou: 0,
     stats: 0,
+    statsScroll: 0,
     statsExit: 0
   });
 
@@ -107,7 +112,7 @@ export function WrappedApp({ data }: WrappedAppProps) {
   const statsVisibility = statsRevealProgress * (1 - statsLiftProgress);
 
   return (
-    <main className="relative min-h-[430vh] overflow-x-clip bg-magic text-cream">
+    <main className="relative min-h-[620vh] overflow-x-clip bg-magic text-cream">
       <ProgressBar progress={scroll.overall} />
       <ParticleCanvas
         count={data.particle.count}
@@ -152,9 +157,10 @@ export function WrappedApp({ data }: WrappedAppProps) {
         revealProgress={statsRevealProgress}
         visibility={statsVisibility}
         liftProgress={statsLiftProgress}
+        scrollProgress={scroll.statsScroll}
       />
 
-      <div className="relative z-[45] mx-auto max-w-4xl space-y-5 px-4 pb-16 pt-[300vh] md:space-y-6 md:px-6">
+      <div className="relative z-[45] mx-auto max-w-4xl space-y-5 px-4 pb-16 pt-[500vh] md:space-y-6 md:px-6">
         <OverviewSection title={data.overview.title} cards={data.overview.cards} />
         <LanguagesSection title={data.particle.title} items={data.particle.languages} />
         <ProjectsSection

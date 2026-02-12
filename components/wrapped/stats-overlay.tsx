@@ -11,6 +11,7 @@ type StatsOverlayProps = {
   revealProgress: number;
   visibility: number;
   liftProgress: number;
+  scrollProgress: number;
 };
 
 function clamp(value: number, min: number, max: number) {
@@ -45,8 +46,12 @@ export function StatsOverlay({
   sections,
   revealProgress,
   visibility,
-  liftProgress
+  liftProgress,
+  scrollProgress
 }: StatsOverlayProps) {
+  // Calculate how much to scroll the content based on page scroll
+  // This shifts content up to reveal sections below the fold
+  const contentScrollOffset = scrollProgress * 80; // scroll up to 80vh as user scrolls
   const sectionOffsets = sections.map((_, sectionIndex) => {
     return sections
       .slice(0, sectionIndex)
@@ -55,7 +60,7 @@ export function StatsOverlay({
 
   return (
     <section
-      className="fixed inset-0 z-40 overflow-y-auto overflow-x-hidden px-4 pb-12 pt-20 md:px-8"
+      className="fixed inset-0 z-40 overflow-hidden px-4 pb-12 pt-20 md:px-8"
       style={{
         opacity: visibility,
         transform: `translateY(${-20 * liftProgress}vh)`,
@@ -65,7 +70,13 @@ export function StatsOverlay({
       }}
       aria-hidden={visibility < 0.1}
     >
-      <div className="mx-auto max-w-4xl">
+      <div
+        className="mx-auto max-w-4xl"
+        style={{
+          transform: `translateY(-${contentScrollOffset}vh)`,
+          transition: "transform 0.1s ease-out"
+        }}
+      >
         <p className="text-center text-xs uppercase tracking-[0.22em] text-periwinkle">{subtitle}</p>
         <h2 className="mt-2 text-center font-display text-4xl text-cream md:text-5xl">{title}</h2>
 
