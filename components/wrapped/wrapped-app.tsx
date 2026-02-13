@@ -50,7 +50,7 @@ function computeScrollState(): ScrollState {
     morph: clamp(scrollY / viewport, 0, 1),
     thankYou: clamp((scrollY - viewport) / (viewport * 0.5), 0, 1),
     stats: clamp((scrollY - viewport * 1.8) / (viewport * 0.6), 0, 1),
-    // Scroll through stats content: starts after reveal (2.6vh), ends before exit (4.0vh)
+    // Scroll through stats content: starts after reveal (2.4vh), ends before exit (3.8vh)
     statsScroll: clamp((scrollY - viewport * 2.4) / (viewport * 1.4), 0, 1),
     // Stats exit animation
     statsExit: clamp((scrollY - viewport * 3.8) / (viewport * 0.8), 0, 1),
