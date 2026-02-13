@@ -14,6 +14,7 @@ import { ThankYouOverlay } from "@/components/wrapped/thank-you-overlay";
 import { WorkshopsSection } from "@/components/wrapped/workshops-section";
 import { ParticleCanvas } from "@/components/particles/particle-canvas";
 import { UgaGReference } from "@/components/particles/uga-g-reference";
+import { Footer } from "@/components/wrapped/footer";
 import type { WrappedData } from "@/types/wrapped";
 
 type WrappedAppProps = {
@@ -170,7 +171,7 @@ export function WrappedApp({ data }: WrappedAppProps) {
         scrollProgress={scroll.statsScroll}
       />
 
-      <div className="relative z-[45] mx-auto max-w-4xl space-y-5 px-4 pb-16 pt-[530vh] md:space-y-6 md:px-6">
+      <div className="relative z-[45] mx-auto max-w-4xl space-y-5 px-4 pb-8 pt-[530vh] md:space-y-6 md:px-6">
         <OverviewSection
           title={data.overview.title}
           cards={data.overview.cards}
@@ -199,6 +200,7 @@ export function WrappedApp({ data }: WrappedAppProps) {
           items={data.highlights.items}
         />
       </div>
+      <Footer className="pb-4" />
     </main>
   );
 }
