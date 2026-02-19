@@ -41,9 +41,8 @@ function easeInOutCubic(t: number) {
   return 1 - Math.pow(-2 * t + 2, 3) / 2;
 }
 
-function computeScrollState(): ScrollState {
+function computeScrollState(viewport: number): ScrollState {
   const scrollY = window.scrollY;
-  const viewport = window.innerHeight;
   const max = Math.max(1, document.documentElement.scrollHeight - viewport);
 
   return {
@@ -70,6 +69,12 @@ export function WrappedApp({ data }: WrappedAppProps) {
 
   useEffect(() => {
     let frame = 0;
+    let viewport = window.innerHeight;
+
+    const updateViewport = () => {
+      // Keep this stable during scroll; mobile URL bar changes can jitter innerHeight.
+      viewport = window.innerHeight;
+    };
 
     const onScroll = () => {
       if (frame) {
@@ -77,18 +82,26 @@ export function WrappedApp({ data }: WrappedAppProps) {
       }
 
       frame = window.requestAnimationFrame(() => {
-        setScroll(computeScrollState());
+        setScroll(computeScrollState(viewport));
         frame = 0;
       });
     };
 
+    const onResize = () => {
+      updateViewport();
+      onScroll();
+    };
+
+    updateViewport();
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    window.addEventListener("resize", onResize);
+    window.visualViewport?.addEventListener("resize", onResize);
 
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("resize", onResize);
+      window.visualViewport?.removeEventListener("resize", onResize);
       if (frame) {
         window.cancelAnimationFrame(frame);
       }

@@ -51,7 +51,7 @@ export function StatsOverlay({
 }: StatsOverlayProps) {
   // Calculate how much to scroll the content based on page scroll
   // This shifts content up to reveal sections below the fold
-  const contentScrollOffset = scrollProgress * 80; // scroll up to 80vh as user scrolls
+  const contentScrollOffset = scrollProgress * 100; // scroll up to 80vh as user scrolls
   const sectionOffsets = sections.map((_, sectionIndex) => {
     return sections
       .slice(0, sectionIndex)
@@ -63,8 +63,9 @@ export function StatsOverlay({
       className="fixed inset-0 z-40 overflow-hidden px-4 pb-12 pt-20 md:px-8"
       style={{
         opacity: visibility,
-        transform: `translateY(${-20 * liftProgress}vh)`,
+        transform: `translate3d(0, ${-20 * liftProgress}vh, 0)`,
         pointerEvents: visibility > 0.1 ? "auto" : "none",
+        willChange: "opacity, transform",
         background:
           "radial-gradient(circle at top, rgba(155,103,152,0.35) 0%, rgba(62,76,138,0.82) 48%, rgba(36,44,84,0.92) 100%)"
       }}
@@ -73,8 +74,8 @@ export function StatsOverlay({
       <div
         className="mx-auto max-w-4xl"
         style={{
-          transform: `translateY(-${contentScrollOffset}vh)`,
-          transition: "transform 0.1s ease-out"
+          transform: `translate3d(0, -${contentScrollOffset}vh, 0)`,
+          willChange: "transform"
         }}
       >
         <p className="text-center text-xs uppercase tracking-[0.22em] text-periwinkle">{subtitle}</p>

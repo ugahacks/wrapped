@@ -181,10 +181,30 @@ export function ParticleCanvas({
     }
 
     let frameId = 0;
+    let lastFrameTime = 0;
     let width = 0;
     let height = 0;
     let particles: Particle[] = [];
     let gPoints: Point[] = [];
+    const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const lowCpu = typeof navigator.hardwareConcurrency === "number" && navigator.hardwareConcurrency <= 4;
+    const lowMemory =
+      typeof (navigator as Navigator & { deviceMemory?: number }).deviceMemory === "number" &&
+      ((navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 8) <= 4;
+    const saveData = Boolean(
+      (
+        navigator as Navigator & {
+          connection?: { saveData?: boolean };
+        }
+      ).connection?.saveData
+    );
+    const lowPowerMode = isCoarsePointer || prefersReducedMotion || lowCpu || lowMemory || saveData;
+    const effectiveCount = Math.max(24, Math.round(count * (lowPowerMode ? 0.35 : 1)));
+    const dprCap = lowPowerMode ? 1 : 2;
+    const showGlow = !lowPowerMode;
+    const frameIntervalMs = lowPowerMode ? 1000 / 30 : 1000 / 60;
+    const targetRed = hexToRgb(gMorphColor);
 
     const toScreen = (point: Point) => {
       const logoSize = Math.min(width, height) * 0.62;
@@ -198,7 +218,7 @@ export function ParticleCanvas({
     const samplePointsFromSvg = () => {
       const path = document.getElementById("uga-g-path") as SVGPathElement | null;
       if (!path || typeof path.getTotalLength !== "function") {
-        return buildFallbackPoints(count);
+        return buildFallbackPoints(effectiveCount);
       }
 
       const totalLength = path.getTotalLength();
@@ -211,8 +231,8 @@ export function ParticleCanvas({
       const centerY = 122.5;
       const scale = 100 / 378;
 
-      for (let i = 0; i < count; i += 1) {
-        const lengthAtPoint = (i / (count - 1)) * totalLength;
+      for (let i = 0; i < effectiveCount; i += 1) {
+        const lengthAtPoint = (i / (effectiveCount - 1)) * totalLength;
         const point = path.getPointAtLength(lengthAtPoint);
         points.push({
           x: 50 + (point.x - centerX) * scale,
@@ -228,10 +248,10 @@ export function ParticleCanvas({
         return;
       }
 
-      const colorPool = buildLanguagePool(languages, count);
+      const colorPool = buildLanguagePool(languages, effectiveCount);
       particles = [];
 
-      for (let i = 0; i < count; i += 1) {
+      for (let i = 0; i < effectiveCount; i += 1) {
         const target = toScreen(gPoints[i]);
         particles.push({
           baseX: Math.random() * width,
@@ -246,7 +266,7 @@ export function ParticleCanvas({
     };
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, dprCap);
       width = window.innerWidth;
       height = window.innerHeight;
 
@@ -263,13 +283,18 @@ export function ParticleCanvas({
     };
 
     const draw = (time: number) => {
+      if (time - lastFrameTime < frameIntervalMs) {
+        frameId = window.requestAnimationFrame(draw);
+        return;
+      }
+      lastFrameTime = time;
+
       const progress = easeInOutCubic(clamp(morphRef.current, 0, 1));
       const calm = clamp(calmRef.current, 0, 1);
       const morphStart = clamp(gMorphStart, 0, 0.98);
       const colorBlend = easeInOutCubic(
         clamp((progress - morphStart) / Math.max(0.0001, 1 - morphStart), 0, 1)
       );
-      const targetRed = hexToRgb(gMorphColor);
 
       context.clearRect(0, 0, width, height);
 
@@ -287,14 +312,16 @@ export function ParticleCanvas({
         const drawRgb = mixRgb(particle.baseRgb, targetRed, colorBlend);
         const drawColor = rgbToCss(drawRgb);
 
-        context.globalAlpha = alpha * 0.32;
-        const glow = context.createRadialGradient(x, y, 0, x, y, particle.radius * 3.2);
-        glow.addColorStop(0, drawColor);
-        glow.addColorStop(1, "transparent");
-        context.fillStyle = glow;
-        context.beginPath();
-        context.arc(x, y, particle.radius * 3.2, 0, Math.PI * 2);
-        context.fill();
+        if (showGlow) {
+          context.globalAlpha = alpha * 0.32;
+          const glow = context.createRadialGradient(x, y, 0, x, y, particle.radius * 3.2);
+          glow.addColorStop(0, drawColor);
+          glow.addColorStop(1, "transparent");
+          context.fillStyle = glow;
+          context.beginPath();
+          context.arc(x, y, particle.radius * 3.2, 0, Math.PI * 2);
+          context.fill();
+        }
 
         context.globalAlpha = alpha;
         context.fillStyle = drawColor;
